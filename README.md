@@ -1,1 +1,1 @@
-# irods_api_plugin_multipart
+# irods_api_plugin_bulkreg

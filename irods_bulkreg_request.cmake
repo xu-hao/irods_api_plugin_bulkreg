@@ -1,11 +1,11 @@
 set(
     REQ_AVRO_FILE
-  irods_multipart_request
+  irods_bulkreg_request
 )
 
 set(
   REQ_TARGET_FILE
-  libapi_plugin_multipart 
+  libapi_plugin_bulkreg 
 )
 
 

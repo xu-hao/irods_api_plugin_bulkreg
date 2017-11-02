@@ -1,26 +1,25 @@
 set(
-  IRODS_API_PLUGIN_SOURCES_api_plugin_unipart_server
-  ${CMAKE_SOURCE_DIR}/src/libapi_plugin_unipart.cpp
+  IRODS_API_PLUGIN_SOURCES_api_plugin_bulkreg_server
+  ${CMAKE_SOURCE_DIR}/src/libapi_plugin_bulkreg.cpp
   )
 
 set(
-  IRODS_API_PLUGIN_SOURCES_api_plugin_unipart_client
-  ${CMAKE_SOURCE_DIR}/src/libapi_plugin_unipart.cpp
+  IRODS_API_PLUGIN_SOURCES_api_plugin_bulkreg_client
+  ${CMAKE_SOURCE_DIR}/src/libapi_plugin_bulkreg.cpp
   )
 
 set(
-  IRODS_API_PLUGIN_COMPILE_DEFINITIONS_api_plugin_unipart_server
+  IRODS_API_PLUGIN_COMPILE_DEFINITIONS_api_plugin_bulkreg_server
   RODS_SERVER
   ENABLE_RE
   )
 
 set(
-  IRODS_API_PLUGIN_COMPILE_DEFINITIONS_api_plugin_unipart_client
+  IRODS_API_PLUGIN_COMPILE_DEFINITIONS_api_plugin_bulkreg_client
   )
 
 set(
-  IRODS_API_PLUGIN_LINK_LIBRARIES_api_plugin_unipart_server
-  irods_api_endpoint
+  IRODS_API_PLUGIN_LINK_LIBRARIES_api_plugin_bulkreg_server
   irods_client
   irods_server
   irods_common
@@ -28,8 +27,7 @@ set(
   )
 
 set(
-  IRODS_API_PLUGIN_LINK_LIBRARIES_api_plugin_unipart_client
-  irods_api_endpoint
+  IRODS_API_PLUGIN_LINK_LIBRARIES_api_plugin_bulkreg_client
   irods_client
   irods_common
   irods_plugin_dependencies
@@ -37,11 +35,11 @@ set(
 
 set(
   IRODS_API_PLUGINS
-  api_plugin_unipart_server
-  api_plugin_unipart_client
+  api_plugin_bulkreg_server
+  api_plugin_bulkreg_client
   )
 
-include(irods_unipart_request.cmake)
+
 
 foreach(PLUGIN ${IRODS_API_PLUGINS})
   add_library(
@@ -88,3 +86,9 @@ foreach(PLUGIN ${IRODS_API_PLUGINS})
     DESTINATION usr/lib/irods/plugins/api_v5
     )
 endforeach()
+
+
+
+
+
+

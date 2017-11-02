@@ -5,7 +5,7 @@ find_package(IRODS 4.2.2 EXACT REQUIRED)
 set(CMAKE_C_COMPILER ${IRODS_EXTERNALS_FULLPATH_CLANG}/bin/clang)
 set(CMAKE_CXX_COMPILER ${IRODS_EXTERNALS_FULLPATH_CLANG}/bin/clang++)
 
-project(irods-api-plugin-multipart C CXX)
+project(irods-api-plugin-bulkreg C CXX)
 
 include(${IRODS_TARGETS_PATH})
 
@@ -38,14 +38,14 @@ link_libraries(c++abi)
 link_libraries(pthread)
 link_libraries(dl)
 link_libraries(${IRODS_EXTERNALS_FULLPATH_BOOST}/lib/libboost_program_options.so )
+link_libraries(irods_server)
 
 include_directories(${IRODS_EXTERNALS_FULLPATH_CLANG}/include/c++/v1)
 set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,-z,defs")
 
-include(api_plugin_multipart.cmake)
-include(api_plugin_unipart.cmake)
+include(api_plugin_bulkreg.cmake)
 
-set(CPACK_PACKAGE_FILE_NAME "irods-api-plugin-multipart${IRODS_PACKAGE_FILE_NAME_SUFFIX}")
+set(CPACK_PACKAGE_FILE_NAME "irods-api-plugin-bulkreg${IRODS_PACKAGE_FILE_NAME_SUFFIX}")
 set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY OFF)
 set(CPACK_COMPONENT_INCLUDE_TOPLEVEL_DIRECTORY OFF)
 set(CPACK_COMPONENTS_GROUPING IGNORE)
@@ -75,10 +75,10 @@ set(CPACK_RPM_PACKAGE_AUTOPROV 0)
 
 set(CPACK_ARCHIVE_COMPONENT_INSTALL OFF)
 
-set(CPACK_DEBIAN_PACKAGE_NAME "irods-api-plugin-multipart")
+set(CPACK_DEBIAN_PACKAGE_NAME "irods-api-plugin-bulkreg")
 set(CPACK_DEBIAN_PACKAGE_DEPENDS "${IRODS_PACKAGE_DEPENDENCIES_STRING}, irods-runtime (= ${IRODS_VERSION}), libc6")
 
-set(CPACK_RPM_PACKAGE_NAME "irods-api-plugin-multipart")
+set(CPACK_RPM_PACKAGE_NAME "irods-api-plugin-bulkreg")
 if (IRODS_LINUX_DISTRIBUTION_NAME STREQUAL "centos" OR IRODS_LINUX_DISTRIBUTION_NAME STREQUAL "centos linux")
   set(CPACK_RPM_PACKAGE_REQUIRES "${IRODS_PACKAGE_DEPENDENCIES_STRING}, irods-runtime = ${IRODS_VERSION}, openssl")
 elseif (IRODS_LINUX_DISTRIBUTION_NAME STREQUAL "opensuse")
