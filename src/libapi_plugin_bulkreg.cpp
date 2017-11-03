@@ -38,7 +38,7 @@ int call_bulkreg(
 #ifdef RODS_SERVER
     static irods::error serialize_void_ptr(
                     boost::any               _p,
-                    irods::re_serialization::serialized_parameter_t& _out) { 
+                    irods::re_serialization::serialized_parameter_t& _out) {
                 try {
                     boost::any_cast<void*>(_p);
                 }
@@ -59,14 +59,25 @@ int call_bulkreg(
 // api function to be referenced by the entry
 int rs_bulkreg( rsComm_t* _comm, void *_ptr, int* _out ) {
     rodsLog( LOG_NOTICE, "Dynamic API - BULKREG" );
-    bytesBuf_t *bb = reinterpret_cast<bytesBuf_t *>(_ptr);
-    auto in = avro::memoryInputStream(reinterpret_cast<uint8_t *>(bb->buf), bb->len);
-    auto dec = avro::binaryDecoder();
-    
-    dec->init(*in);
+
     irods::Bulk bulk;
-    avro::decode(*dec, bulk);
-    
+    try {
+      bytesBuf_t *bb = reinterpret_cast<bytesBuf_t *>(_ptr);
+      auto in = avro::memoryInputStream(reinterpret_cast<uint8_t *>(bb->buf), bb->len);
+      auto dec = avro::binaryDecoder();
+
+      dec->init(*in);
+
+      avro::decode(*dec, bulk);
+
+    } catch(avro::Exception e) {
+      int status = -1;
+      std::string err{"avro exception: "};
+      err += e.what();
+      irods::log(ERROR(status, err.c_str()));
+      return status;
+    }
+
     // =-=-=-=-=-=-=-
     // call factory for database object
     irods::database_object_ptr db_obj_ptr;

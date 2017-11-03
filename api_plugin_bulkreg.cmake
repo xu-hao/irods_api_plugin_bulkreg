@@ -83,12 +83,6 @@ foreach(PLUGIN ${IRODS_API_PLUGINS})
     TARGETS
     ${PLUGIN}
     LIBRARY
-    DESTINATION usr/lib/irods/plugins/api_v5
+    DESTINATION usr/lib/irods/plugins/api
     )
 endforeach()
-
-
-
-
-
-
