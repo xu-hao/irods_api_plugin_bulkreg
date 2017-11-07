@@ -60,6 +60,10 @@ int call_bulkreg(
 int rs_bulkreg( rsComm_t* _comm, void *_ptr, int* _out ) {
     rodsLog( LOG_NOTICE, "Dynamic API - BULKREG" );
 
+    if (rsComm->clientUser.authInfo.authFlag < REMOTE_PRIV_USER_AUTH) {
+        return(CAT_INSUFFICIENT_PRIVILEGE_LEVEL);
+    }
+    
     irods::Bulk bulk;
     try {
       bytesBuf_t *bb = reinterpret_cast<bytesBuf_t *>(_ptr);
